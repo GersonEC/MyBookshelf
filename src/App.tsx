@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import './App.css';
 
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-const BOOKSHELF_BASE_URL = 'https://www.googleapis.com/books/v1/users';
 
 const fetchVolumes = async (term: string) => {
   const res = await fetch(`${BASE_URL}?q=${term}`);
