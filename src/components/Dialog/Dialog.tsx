@@ -1,19 +1,27 @@
-import * as RadixDialog from '@radix-ui/react-dialog';
+import { Dialog as HeadlessDialog } from '@headlessui/react';
+import { useState } from 'react';
 
-const Dialog = () => {
+function Dialog() {
+  let [isOpen, setIsOpen] = useState(true);
+
   return (
-    <RadixDialog.Root>
-      <RadixDialog.Trigger></RadixDialog.Trigger>
-      <RadixDialog.Portal>
-        <RadixDialog.Overlay> </RadixDialog.Overlay>
-        <RadixDialog.Content>
-          <RadixDialog.Title> Dialog Title </RadixDialog.Title>
-          <RadixDialog.Description> </RadixDialog.Description>
-          <RadixDialog.Close> </RadixDialog.Close>
-        </RadixDialog.Content>
-      </RadixDialog.Portal>
-    </RadixDialog.Root>
+    <HeadlessDialog open={isOpen} onClose={() => setIsOpen(false)}>
+      <HeadlessDialog.Panel>
+        <HeadlessDialog.Title>Deactivate account</HeadlessDialog.Title>
+        <HeadlessDialog.Description>
+          This will permanently deactivate your account
+        </HeadlessDialog.Description>
+
+        <p>
+          Are you sure you want to deactivate your account? All of your data
+          will be permanently removed. This action cannot be undone.
+        </p>
+
+        <button onClick={() => setIsOpen(false)}>Deactivate</button>
+        <button onClick={() => setIsOpen(false)}>Cancel</button>
+      </HeadlessDialog.Panel>
+    </HeadlessDialog>
   );
-};
+}
 
 export default Dialog;
