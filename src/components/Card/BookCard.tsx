@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Dialog from '../Dialog';
 import Card from './Card';
 
 interface Props {
@@ -8,6 +10,11 @@ export const BookCard: React.FC<Props> = ({ book }) => {
   const defaultCover = book.volumeInfo.imageLinks
     ? book.volumeInfo.imageLinks.thumbnail
     : '';
-
-  return <Card backgroundImage={defaultCover} />;
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Card backgroundImage={defaultCover} onClick={() => setIsOpen(true)} />
+      {isOpen && <Dialog />}
+    </>
+  );
 };

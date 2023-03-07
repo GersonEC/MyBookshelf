@@ -10,11 +10,11 @@ const fetchVolumes = async (term: string) => {
   return json;
 };
 
-const fetchVolume = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}`);
-  const json = await res.json();
-  return json;
-};
+// const fetchVolume = async (id: string) => {
+//   const res = await fetch(`${BASE_URL}/${id}`);
+//   const json = await res.json();
+//   return json;
+// };
 
 const Home = () => {
   const [search, setSearch] = useState('');
