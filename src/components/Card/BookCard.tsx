@@ -11,10 +11,20 @@ export const BookCard: React.FC<Props> = ({ book }) => {
     ? book.volumeInfo.imageLinks.thumbnail
     : '';
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleDismiss = () => setIsOpen(false);
+
   return (
-    <>
+    <div>
       <Card backgroundImage={defaultCover} onClick={() => setIsOpen(true)} />
-      {isOpen && <Dialog />}
-    </>
+      {isOpen && (
+        <Dialog
+          isOpen={isOpen}
+          handleDismiss={handleDismiss}
+          title={book.volumeInfo.title}
+          description={book.volumeInfo.description}
+        />
+      )}
+    </div>
   );
 };

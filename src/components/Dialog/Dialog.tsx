@@ -1,27 +1,30 @@
 import { Dialog as HeadlessDialog } from '@headlessui/react';
-import { useState } from 'react';
+import './Dialog.css';
 
-function Dialog() {
-  let [isOpen, setIsOpen] = useState(true);
-
+interface Props {
+  title: string;
+  description: string;
+  isOpen: boolean;
+  handleDismiss: () => void;
+}
+const Dialog: React.FC<Props> = (props: Props) => {
   return (
-    <HeadlessDialog open={isOpen} onClose={() => setIsOpen(false)}>
-      <HeadlessDialog.Panel>
-        <HeadlessDialog.Title>Deactivate account</HeadlessDialog.Title>
+    <HeadlessDialog
+      className='wrapper'
+      open={props.isOpen}
+      onClose={props.handleDismiss}
+    >
+      <div className='backdrop' onClick={props.handleDismiss} />
+      <HeadlessDialog.Panel className={'dialog'}>
+        <HeadlessDialog.Title>{props.title}</HeadlessDialog.Title>
         <HeadlessDialog.Description>
-          This will permanently deactivate your account
+          {props.description}
         </HeadlessDialog.Description>
-
-        <p>
-          Are you sure you want to deactivate your account? All of your data
-          will be permanently removed. This action cannot be undone.
-        </p>
-
-        <button onClick={() => setIsOpen(false)}>Deactivate</button>
-        <button onClick={() => setIsOpen(false)}>Cancel</button>
+        <button onClick={props.handleDismiss}>Deactivate</button>
+        <button onClick={props.handleDismiss}>Cancel</button>
       </HeadlessDialog.Panel>
     </HeadlessDialog>
   );
-}
+};
 
 export default Dialog;
