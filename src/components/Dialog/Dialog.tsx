@@ -1,4 +1,6 @@
 import { Dialog as HeadlessDialog } from '@headlessui/react';
+import { X as Close } from 'react-feather';
+
 import './Dialog.css';
 
 interface Props {
@@ -16,6 +18,9 @@ const Dialog: React.FC<Props> = (props: Props) => {
     >
       <div className='backdrop' onClick={props.handleDismiss} />
       <HeadlessDialog.Panel className={'dialog'}>
+        <button className='closeBtn' onClick={props.handleDismiss}>
+          <Close />
+        </button>
         <HeadlessDialog.Title>{props.title}</HeadlessDialog.Title>
         <HeadlessDialog.Description>
           {props.description}

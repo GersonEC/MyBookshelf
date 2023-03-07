@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div<{ backgroundImage?: string }>((props) => ({
+const Wrapper = styled.button<{ backgroundImage?: string }>((props) => ({
   width: '200px',
   height: '300px',
   borderRadius: '6px',
