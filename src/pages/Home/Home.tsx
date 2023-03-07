@@ -22,7 +22,7 @@ const Home = () => {
 
   const searchVolumes = async () => {
     const response = await fetchVolumes(search);
-    console.log(response.items[0]);
+    console.log(response);
     setBooks(response.items);
     setSearch('');
   };
