@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import BookList from '../../components/BookList';
+import Button from '../../components/Button';
 import useVolumes from '../../hooks/useVolumes';
 import { BooksWrapper } from './Home.styles';
 
@@ -29,6 +30,7 @@ const Home = () => {
   return (
     <>
       <h1>Home</h1>
+      <Button label='Ciao' onClick={() => alert('ciao')} />
       <div>
         <label htmlFor='volumesSearch'>Search Volumes</label>
         <input
