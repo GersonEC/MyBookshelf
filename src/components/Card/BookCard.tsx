@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Dialog from '../Dialog';
+import BookDialog from '../Dialog';
 import Card from './Card';
 
 interface Props {
@@ -18,12 +18,7 @@ export const BookCard: React.FC<Props> = ({ book }) => {
     <div>
       <Card backgroundImage={defaultCover} onClick={() => setIsOpen(true)} />
       {isOpen && (
-        <Dialog
-          isOpen={isOpen}
-          handleDismiss={handleDismiss}
-          title={book.volumeInfo.title}
-          description={book.volumeInfo.description}
-        />
+        <BookDialog isOpen={isOpen} handleDismiss={handleDismiss} book={book} />
       )}
     </div>
   );

@@ -1,3 +1,3 @@
-import Dialog from './Dialog';
+import BookDialog from './BookDialog';
 
-export default Dialog;
+export default BookDialog;
