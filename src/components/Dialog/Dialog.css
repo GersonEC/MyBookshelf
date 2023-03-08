@@ -35,3 +35,7 @@
   background: transparent;
   border: none;
 }
+.description {
+  max-height: 60vh;
+  overflow: auto;
+}

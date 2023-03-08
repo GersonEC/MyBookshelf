@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import BookList from '../../components/BookList';
+import useVolumes from '../../hooks/useVolumes';
 import { BooksWrapper } from './Home.styles';
-
-const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-
-const fetchVolumes = async (term: string) => {
-  const res = await fetch(`${BASE_URL}?q=${term}`);
-  const json = await res.json();
-  return json;
-};
 
 // const fetchVolume = async (id: string) => {
 //   const res = await fetch(`${BASE_URL}/${id}`);
@@ -17,15 +10,15 @@ const fetchVolumes = async (term: string) => {
 // };
 
 const Home = () => {
-  const [search, setSearch] = useState('');
-  const [books, setBooks] = useState<Book[]>([]);
+  const [term, setTerm] = useState('');
+  const mutation = useVolumes(term);
 
   const searchVolumes = async () => {
-    const response = await fetchVolumes(search);
-    console.log(response);
-    setBooks(response.items);
-    setSearch('');
+    mutation.mutate();
   };
+
+  if (mutation.status === 'loading') return <h1>Loading...</h1>;
+  if (mutation.status === 'error') return <h1>Error</h1>;
 
   //"Cx6aDwAAQBAJ"
   // const searchVolume = async () => {
@@ -40,8 +33,8 @@ const Home = () => {
         <label htmlFor='volumesSearch'>Search Volumes</label>
         <input
           name='volumesSearch'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={term}
+          onChange={(e) => setTerm(e.target.value)}
         />
         <button onClick={searchVolumes}>Search</button>
       </div>
@@ -55,7 +48,7 @@ const Home = () => {
         <button onClick={searchVolume}>Search</button>
       </div> */}
       <BooksWrapper>
-        {books.length > 0 && <BookList books={books} />}
+        {mutation.data && <BookList books={mutation.data.items as Book[]} />}
       </BooksWrapper>
     </>
   );

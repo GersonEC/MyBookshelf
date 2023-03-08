@@ -22,7 +22,7 @@ const Dialog: React.FC<Props> = (props: Props) => {
           <Close />
         </button>
         <HeadlessDialog.Title>{props.title}</HeadlessDialog.Title>
-        <HeadlessDialog.Description>
+        <HeadlessDialog.Description className='description'>
           {props.description}
         </HeadlessDialog.Description>
         <button onClick={props.handleDismiss}>Deactivate</button>
