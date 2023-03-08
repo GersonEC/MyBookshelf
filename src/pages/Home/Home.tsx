@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
 import useVolumes from '../../hooks/useVolumes';
@@ -31,6 +32,7 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <Button label='Ciao' onClick={() => alert('ciao')} />
+      <Link to='/bookshelf'>Bookshelf</Link>
       <div>
         <label htmlFor='volumesSearch'>Search Volumes</label>
         <input
