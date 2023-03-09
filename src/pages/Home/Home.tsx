@@ -12,6 +12,7 @@ import { BooksWrapper } from './Home.styles';
 // };
 
 const Home = () => {
+  const [users, setUsers] = useState([]);
   const [term, setTerm] = useState('');
   const mutation = useVolumes(term);
 
@@ -31,6 +32,7 @@ const Home = () => {
   return (
     <>
       <h1>Home</h1>
+      <p>User name: {}</p>
       <Button label='Ciao' onClick={() => alert('ciao')} />
       <Link to='/bookshelf'>Bookshelf</Link>
       <div>
