@@ -1,21 +1,12 @@
-import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import Button from '../../components/Button';
+import useSignup from '../../hooks/useSignup';
 
-const register = async (user: User) => {
-  const res = await fetch(`http://localhost:8080/register`, {
-    method: 'POST',
-    body: JSON.stringify(user),
-  });
-  const json = await res.json();
-  return json;
-};
-
-const Register = () => {
+const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const mutation = useMutation(['register'], register);
+  const mutation = useSignup();
 
   const handleRegister = (e: any) => {
     e.preventDefault();
@@ -26,6 +17,8 @@ const Register = () => {
     };
     mutation.mutate(user);
   };
+
+  const isSubmitDisable = mutation.status === 'loading';
 
   return (
     <>
@@ -60,10 +53,10 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <Button type='submit' label='Register' />
+        <Button type='submit' label='Register' disabled={isSubmitDisable} />
       </form>
     </>
   );
 };
 
-export default Register;
+export default Signup;

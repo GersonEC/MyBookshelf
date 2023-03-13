@@ -41,7 +41,9 @@ const Home = () => {
       <Button label='Ciao' onClick={() => alert('ciao')} />
       <Link to='/bookshelf'>Bookshelf</Link>
       <br />
-      <Link to='/register'>Register</Link>
+      <Link to='/signup'>Sign up</Link>
+      <br />
+      <Link to='/signin'>Sign in</Link>
       <div>
         <label htmlFor='volumesSearch'>Search Volumes</label>
         <input

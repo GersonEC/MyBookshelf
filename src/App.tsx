@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import BookshelfProvider from './context/BookshelfProvider';
 import Bookshelf from './pages/Bookshelf';
 import Home from './pages/Home/Home';
-import Register from './pages/Register';
+import Signup from './pages/Signup';
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     element: <Bookshelf />,
   },
   {
-    path: '/register',
-    element: <Register />,
+    path: '/signup',
+    element: <Signup />,
   },
 ]);
 
