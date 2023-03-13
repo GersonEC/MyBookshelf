@@ -88,3 +88,5 @@ interface User {
   email: string;
   password: string;
 }
+
+type SignIn = Omit<User, 'name'>;

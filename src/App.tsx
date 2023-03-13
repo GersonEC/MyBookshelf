@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import BookshelfProvider from './context/BookshelfProvider';
 import Bookshelf from './pages/Bookshelf';
 import Home from './pages/Home/Home';
+import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 const queryClient = new QueryClient();
 
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />,
+  },
+  {
+    path: '/signin',
+    element: <Signin />,
   },
 ]);
 

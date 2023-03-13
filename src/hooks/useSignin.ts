@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-const register = async (user: User) => {
-  const res = await fetch(`http://localhost:8080/register`, {
+const signin = async (user: SignIn) => {
+  const res = await fetch(`http://localhost:8080/signin`, {
     method: 'POST',
     body: JSON.stringify(user),
   });
@@ -12,9 +12,9 @@ const register = async (user: User) => {
 
 const useSignin = () => {
   const navigate = useNavigate();
-  const mutation = useMutation<User, unknown, User, unknown>(
-    ['register'],
-    register,
+  const mutation = useMutation<User, unknown, SignIn, unknown>(
+    ['signin'],
+    signin,
     {
       onSuccess: () => {
         navigate('/');

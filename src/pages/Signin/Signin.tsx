@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import Button from '../../components/Button';
-import useSignup from '../../hooks/useSignup';
+import useSignin from '../../hooks/useSignin';
 
-const Signup = () => {
-  const [name, setName] = useState('');
+const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const mutation = useSignup();
+  const mutation = useSignin();
 
   const handleRegister = (e: any) => {
     e.preventDefault();
-    const user: User = {
-      name,
+    const user: SignIn = {
       email,
       password,
     };
@@ -22,17 +20,8 @@ const Signup = () => {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1>Sign in</h1>
       <form onSubmit={handleRegister}>
-        <div>
-          <label htmlFor='name'>name</label>
-          <input
-            id='name'
-            name='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
         <div>
           <label htmlFor='email'>email</label>
           <input
@@ -53,10 +42,10 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <Button type='submit' label='Register' disabled={isSubmitDisable} />
+        <Button type='submit' label='Sign In' disabled={isSubmitDisable} />
       </form>
     </>
   );
 };
 
-export default Signup;
+export default Signin;
