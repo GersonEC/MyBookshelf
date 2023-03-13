@@ -82,3 +82,9 @@ interface Book {
   selfLink: string;
   volumeInfo: VolumeInfo;
 }
+
+interface User {
+  name: string;
+  email: string;
+  password: string;
+}
