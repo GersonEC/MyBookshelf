@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
+import useUsers from '../../hooks/useUsers';
 import useVolumes from '../../hooks/useVolumes';
 import { BooksWrapper } from './Home.styles';
 
@@ -12,7 +13,7 @@ import { BooksWrapper } from './Home.styles';
 // };
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const usersQuery = useUsers();
   const [term, setTerm] = useState('');
   const mutation = useVolumes(term);
 
@@ -28,13 +29,19 @@ const Home = () => {
   //   const books = await fetchVolume(search);
   //   setSearch('');
   // };
+  console.log(usersQuery.data);
 
   return (
     <>
       <h1>Home</h1>
-      <p>User name: {}</p>
+      <p>
+        User name:{' '}
+        {usersQuery.status === 'success' ? usersQuery.data[0].name : ''}
+      </p>
       <Button label='Ciao' onClick={() => alert('ciao')} />
       <Link to='/bookshelf'>Bookshelf</Link>
+      <br />
+      <Link to='/register'>Register</Link>
       <div>
         <label htmlFor='volumesSearch'>Search Volumes</label>
         <input
