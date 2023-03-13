@@ -3,3 +3,5 @@ export const QUERY_KEY = {
   signin: 'signin',
   signup: 'signup',
 };
+
+export const USER_SESSION_STORAGE_KEY = 'user_key';

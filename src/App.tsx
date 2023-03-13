@@ -36,7 +36,7 @@ function App() {
           <RouterProvider router={router} />
         </BookshelfProvider>
       </main>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
