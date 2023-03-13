@@ -1,10 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import BookshelfProvider from './context/BookshelfProvider';
 import Bookshelf from './pages/Bookshelf';
 import Home from './pages/Home/Home';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -34,6 +36,7 @@ function App() {
           <RouterProvider router={router} />
         </BookshelfProvider>
       </main>
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
 }

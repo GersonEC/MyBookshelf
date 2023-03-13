@@ -87,6 +87,7 @@ interface User {
   name: string;
   email: string;
   password: string;
+  accessToken?: string;
 }
 
-type SignIn = Omit<User, 'name'>;
+type SignIn = Omit<User, 'name', 'accessToken'>;

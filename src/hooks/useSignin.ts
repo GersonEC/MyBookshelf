@@ -1,5 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { QUERY_KEY } from '../utils/constants';
 
 const signin = async (user: SignIn) => {
   const res = await fetch(`http://localhost:8080/signin`, {
@@ -11,12 +12,14 @@ const signin = async (user: SignIn) => {
 };
 
 const useSignin = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const mutation = useMutation<User, unknown, SignIn, unknown>(
-    ['signin'],
+    [QUERY_KEY.signin],
     signin,
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        queryClient.setQueryData([QUERY_KEY.user], data);
         navigate('/');
       },
       onError: (err) => {
