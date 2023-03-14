@@ -11,6 +11,7 @@ const Signup = () => {
   const handleRegister = (e: any) => {
     e.preventDefault();
     const user: User = {
+      id: '',
       name,
       email,
       password,
