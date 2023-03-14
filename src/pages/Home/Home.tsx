@@ -29,7 +29,7 @@ const Home = () => {
   // };
 
   return (
-    <>
+    <main>
       <h1>Home</h1>
       <p>User name: </p>
       <Button label='Ciao' onClick={() => alert('ciao')} />
@@ -59,7 +59,7 @@ const Home = () => {
       <BooksWrapper>
         {mutation.data && <BookList books={mutation.data.items as Book[]} />}
       </BooksWrapper>
-    </>
+    </main>
   );
 };
 
