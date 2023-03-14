@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
+import { UserContext } from '../../context/UserProvider';
 import useVolumes from '../../hooks/useVolumes';
 import { BooksWrapper } from './Home.styles';
 
@@ -14,6 +15,7 @@ import { BooksWrapper } from './Home.styles';
 const Home = () => {
   const [term, setTerm] = useState('');
   const mutation = useVolumes(term);
+  const { user } = useContext(UserContext);
 
   const searchVolumes = async () => {
     mutation.mutate();
@@ -31,7 +33,7 @@ const Home = () => {
   return (
     <main>
       <h1>Home</h1>
-      <p>User name: </p>
+      <p>User name: {user && user.name} </p>
       <Button label='Ciao' onClick={() => alert('ciao')} />
       <Link to='/bookshelf'>Bookshelf</Link>
       <br />
