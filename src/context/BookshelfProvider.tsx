@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 
 interface BookshelfContextProps {
   books: Book[];
@@ -12,7 +12,7 @@ export const BookshelfContext = React.createContext<BookshelfContextProps>({
   removeBook: () => null,
 });
 
-const BookshelfProvider = ({ children }: any) => {
+const BookshelfProvider = ({ children }: PropsWithChildren) => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const addBook = (book: Book) => {
