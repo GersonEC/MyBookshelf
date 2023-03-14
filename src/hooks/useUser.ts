@@ -40,7 +40,7 @@ const useUser = () => {
     saveUserOnStorage(user);
   }, [user, removeUserFromStorage, saveUserOnStorage]);
 
-  return user;
+  return user ?? null;
 };
 
 export default useUser;
