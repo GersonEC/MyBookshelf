@@ -90,4 +90,7 @@ interface User {
   accessToken?: string;
 }
 
-type SignIn = Omit<User, 'name', 'accessToken'>;
+interface SignIn {
+  email: string;
+  password: string;
+}
