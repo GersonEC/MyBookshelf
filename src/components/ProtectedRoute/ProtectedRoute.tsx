@@ -4,7 +4,7 @@ import useUser from '../../hooks/useUser';
 
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
   const user = useUser();
-  if (!user) return <Navigate to='sign-in' replace />;
+  if (!user) return <Navigate to='/sign-in' replace />;
 
   return <>{children}</>;
 };
