@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { QUERY_KEY } from '../utils/constants';
 
 const signup = async (user: User) => {
-  const res = await fetch(`http://localhost:8080/register`, {
+  const res = await fetch(`http://localhost:8080/signup`, {
     method: 'POST',
     body: JSON.stringify(user),
   });

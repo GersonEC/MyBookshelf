@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { QUERY_KEY } from '../utils/constants';
+import useSessionStorage from './useSessionStorage';
 
-const getUser = async (/*user: User*/) => {
+const fetchUser = async (/*user: User*/) => {
   // if (!user) return null;
   // const res = await fetch(`http://localhost:8080/user`, {
   //   headers: {
@@ -17,12 +19,28 @@ interface UseUserResponse {
 }
 
 const useUser = () => {
-  const query = useQuery<User | null>([QUERY_KEY.user], getUser, {
+  const {
+    getUser,
+    removeUser: removeUserFromStorage,
+    saveUser: saveUserOnStorage,
+  } = useSessionStorage();
+  const { data: user } = useQuery<User | null>([QUERY_KEY.user], fetchUser, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    initialData: getUser,
+    onError: () => removeUserFromStorage(),
   });
-  return query;
+
+  useEffect(() => {
+    if (!user) {
+      removeUserFromStorage();
+      return;
+    }
+    saveUserOnStorage(user);
+  }, [user, removeUserFromStorage, saveUserOnStorage]);
+
+  return user;
 };
 
 export default useUser;
