@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 import BookshelfProvider from './context/BookshelfProvider';
 import UserProvider from './context/UserProvider';
 import Bookshelf from './pages/Bookshelf';
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/bookshelf',
-    element: <Bookshelf />,
+    element: (
+      <ProtectedRoute>
+        <Bookshelf />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/sign-up',
