@@ -18,6 +18,7 @@ const BookDialog: React.FC<Props> = (props: Props) => {
   );
 
   const handleAddToBookshelf = () => {
+    //Save user with book id.
     addBook(props.book);
   };
 
