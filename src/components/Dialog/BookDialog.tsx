@@ -3,6 +3,8 @@ import { X as Close } from 'react-feather';
 
 import { useContext } from 'react';
 import { BookshelfContext } from '../../context/BookshelfProvider';
+import { UserContext } from '../../context/UserProvider';
+import useBookshelf from '../../hooks/useBookshelf';
 import Button from '../Button';
 import './Dialog.css';
 
@@ -12,13 +14,22 @@ interface Props {
   handleDismiss: () => void;
 }
 const BookDialog: React.FC<Props> = (props: Props) => {
+  const { user } = useContext(UserContext);
   const { books, addBook, removeBook } = useContext(BookshelfContext);
+  const { saveToBookshelf } = useBookshelf({ userId: '' });
   const isOnBookshelf = Boolean(
     books.find((book) => book.id === props.book.id)
   );
 
   const handleAddToBookshelf = () => {
-    //Save user with book id.
+    if (!user) {
+      console.log('There is no user logged in.');
+      return;
+    }
+    saveToBookshelf({
+      userId: user.id,
+      book: props.book,
+    });
     addBook(props.book);
   };
 

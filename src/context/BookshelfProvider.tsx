@@ -1,4 +1,11 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import useBookshelf from '../hooks/useBookshelf';
+import { UserContext } from './UserProvider';
 
 interface BookshelfContextProps {
   books: Book[];
@@ -13,7 +20,15 @@ export const BookshelfContext = React.createContext<BookshelfContextProps>({
 });
 
 const BookshelfProvider = ({ children }: PropsWithChildren) => {
-  const [books, setBooks] = useState<Book[]>([]);
+  const { user } = useContext(UserContext);
+  const { userBookshelf } = useBookshelf({ userId: user?.id ?? '' });
+  const [books, setBooks] = useState<Book[]>(userBookshelf.data ?? []);
+
+  useEffect(() => {
+    if (userBookshelf.data) {
+      setBooks(userBookshelf.data);
+    }
+  }, [userBookshelf.data]);
 
   const addBook = (book: Book) => {
     setBooks([...books, book]);
