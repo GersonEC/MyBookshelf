@@ -3,7 +3,6 @@ import Button from '../../components/Button';
 import useSignup from '../../hooks/useSignup';
 
 const Signup = () => {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const mutation = useSignup();
@@ -24,15 +23,6 @@ const Signup = () => {
     <>
       <h1>Sign Up</h1>
       <form onSubmit={handleRegister}>
-        <div>
-          <label htmlFor='name'>name</label>
-          <input
-            id='name'
-            name='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
         <div>
           <label htmlFor='email'>email</label>
           <input
