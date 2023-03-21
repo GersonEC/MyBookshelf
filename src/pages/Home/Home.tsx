@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
-import { UserContext } from '../../context/UserProvider';
 import useSignout from '../../hooks/useSignout';
 import useVolumes from '../../hooks/useVolumes';
 import { BooksWrapper } from './Home.styles';
@@ -16,7 +15,6 @@ import { BooksWrapper } from './Home.styles';
 const Home = () => {
   const [term, setTerm] = useState('');
   const mutation = useVolumes(term);
-  const { user } = useContext(UserContext);
   const signout = useSignout();
   const searchVolumes = async () => {
     mutation.mutate();
@@ -35,7 +33,6 @@ const Home = () => {
     <main>
       <h1>Home</h1>
       <div>
-        <p>User name: {user && user.name} </p>
         <Button onClick={() => signout()} label='Sign out' />
       </div>
       <Button label='Ciao' onClick={() => alert('ciao')} />

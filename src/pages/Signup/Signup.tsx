@@ -12,7 +12,6 @@ const Signup = () => {
     e.preventDefault();
     const user: User = {
       id: '',
-      name,
       email,
       password,
     };
