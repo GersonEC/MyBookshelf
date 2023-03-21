@@ -9,7 +9,7 @@ import Button from '../Button';
 import './Dialog.css';
 
 interface Props {
-  book: Book;
+  book: GoogleBook;
   isOpen: boolean;
   handleDismiss: () => void;
 }

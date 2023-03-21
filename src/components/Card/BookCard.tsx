@@ -3,7 +3,7 @@ import BookDialog from '../Dialog';
 import Card from './Card';
 
 interface Props {
-  book: Book;
+  book: GoogleBook;
 }
 
 export const BookCard: React.FC<Props> = ({ book }) => {

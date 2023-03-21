@@ -70,7 +70,7 @@ interface VolumeInfo {
   title: string;
 }
 
-interface Book {
+interface GoogleBook {
   accessInfo: AccessInfo;
   etag: string;
   id: string;

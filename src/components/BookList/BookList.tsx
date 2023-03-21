@@ -1,7 +1,7 @@
 import { BookCard } from '../Card/BookCard';
 
 interface Props {
-  books: Book[];
+  books: GoogleBook[];
 }
 
 const BookList: React.FC<Props> = ({ books }) => {

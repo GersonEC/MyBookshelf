@@ -60,7 +60,9 @@ const Home = () => {
         <button onClick={searchVolume}>Search</button>
       </div> */}
       <BooksWrapper>
-        {mutation.data && <BookList books={mutation.data.items as Book[]} />}
+        {mutation.data && (
+          <BookList books={mutation.data.items as GoogleBook[]} />
+        )}
       </BooksWrapper>
     </main>
   );

@@ -3,7 +3,7 @@ import { QUERY_KEY } from '../utils/constants';
 
 interface Payload {
   userId: string;
-  book: Book;
+  book: GoogleBook;
 }
 const persistInBookshelf = async ({ userId, book }: Payload) => {
   const res = await fetch(`http://localhost:8080/saveToBookshelf`, {
