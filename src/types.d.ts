@@ -83,6 +83,26 @@ interface GoogleBook {
   volumeInfo: VolumeInfo;
 }
 
+interface Book {
+  etag: string;
+  id: string;
+  kind: string;
+  selfLink: string;
+  description: string; //Su VolumeInfo
+  smallThumbnail: string; //Su VolumeInfo
+  thumbnail: string; //Su VolumeInfo
+  imageExtraLarge: string; //Su VolumeInfo
+  imageLarge: string; //Su VolumeInfo
+  imageMedium: string; //Su VolumeInfo
+  imageSmall: string; //Su VolumeInfo
+  mainCategory: string; //Su VolumeInfo
+  pageCount: number; //Su VolumeInfo
+  publishedDate: string; //Su VolumeInfo
+  publisher: string; //Su VolumeInfo
+  title: string; //Su VolumeInfo
+  subtitle: string; //Su VolumeInfo
+}
+
 interface User {
   id: string;
   email: string;
