@@ -86,7 +86,6 @@ interface GoogleBook {
 interface Book {
   etag: string;
   id: string;
-  kind: string;
   selfLink: string;
   description: string; //Su VolumeInfo
   smallThumbnail: string; //Su VolumeInfo

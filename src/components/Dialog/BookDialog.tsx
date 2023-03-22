@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { BookshelfContext } from '../../context/BookshelfProvider';
 import { UserContext } from '../../context/UserProvider';
 import useBookshelf from '../../hooks/useBookshelf';
+import { mapGoogleBooksToBook } from '../../utils/books';
 import Button from '../Button';
 import './Dialog.css';
 
@@ -16,7 +17,7 @@ interface Props {
 const BookDialog: React.FC<Props> = (props: Props) => {
   const { user } = useContext(UserContext);
   const { books, addBook, removeBook } = useContext(BookshelfContext);
-  const { saveToBookshelf } = useBookshelf({ userId: '' });
+  const { saveToBookshelf, saveToBookshelf2 } = useBookshelf({ userId: '' });
   const isOnBookshelf = Boolean(
     books.find((book) => book.id === props.book.id)
   );
@@ -31,6 +32,15 @@ const BookDialog: React.FC<Props> = (props: Props) => {
       book: props.book,
     });
     addBook(props.book);
+  };
+
+  //TODO: DELETE THIS
+  const handleSaveBook = () => {
+    //TODO: CREATE TRANSFORM BOOK METHOD.
+    const bookToSend = mapGoogleBooksToBook(props.book);
+    saveToBookshelf2({
+      book: bookToSend,
+    });
   };
 
   const handleRemoveFromBookshelf = () => {
@@ -56,7 +66,8 @@ const BookDialog: React.FC<Props> = (props: Props) => {
           onClick={
             isOnBookshelf ? handleRemoveFromBookshelf : handleAddToBookshelf
           }
-        ></Button>
+        />
+        <Button label='save the book' onClick={handleSaveBook} />
         <Dialog.Description className='description'>
           {props.book.volumeInfo.description}
         </Dialog.Description>

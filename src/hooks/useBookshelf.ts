@@ -5,6 +5,11 @@ interface Payload {
   userId: string;
   book: GoogleBook;
 }
+
+interface Payload2 {
+  book: Book;
+}
+
 const persistInBookshelf = async ({ userId, book }: Payload) => {
   const res = await fetch(`http://localhost:8080/saveToBookshelf`, {
     method: 'POST',
@@ -16,6 +21,18 @@ const persistInBookshelf = async ({ userId, book }: Payload) => {
   const json = await res.json();
   return json;
 };
+
+const persistInBookshelf2 = async ({ book }: Payload2) => {
+  const res = await fetch(`http://localhost:8080/bookshelf`, {
+    method: 'POST',
+    body: JSON.stringify({
+      book,
+    }),
+  });
+  const json = await res.json();
+  return json;
+};
+
 
 const fetchUserBookshelf = async (userId: string) => {
   const res = await fetch(`http://localhost:8080/bookshelf/${userId}`);
@@ -36,6 +53,17 @@ const useBookshelf = ({ userId }: UseBookshelfProps) => {
       onError: () => null,
     }
   );
+
+  //TODO: DELETE THIS
+  const mutation2 = useMutation(
+    ['bookshelf'],
+    persistInBookshelf2,
+    {
+      onSuccess: () => null,
+      onError: () => null,
+    }
+  );
+
   const userBookshelf = useQuery(
     [QUERY_KEY.retrieveBookshelf],
     () => fetchUserBookshelf(userId),
@@ -56,9 +84,17 @@ const useBookshelf = ({ userId }: UseBookshelfProps) => {
     });
   };
 
+  //TODO: DELETE THIS
+  const saveToBookshelf2 = ({book} : Payload2) => {
+    mutation2.mutate({
+      book,
+    });
+  };
+
   return {
     userBookshelf,
     saveToBookshelf,
+    saveToBookshelf2
   };
 };
 
