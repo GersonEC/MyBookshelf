@@ -8,7 +8,7 @@ const Bookshelf = () => {
   return (
     <div>
       <h1>My Bookshelf</h1>
-      <BookList books={books} />
+      <BookList books={books} fromGoogle={false} />
     </div>
   );
 };

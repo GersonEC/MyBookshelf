@@ -5,18 +5,36 @@ import { useContext } from 'react';
 import { BookshelfContext } from '../../context/BookshelfProvider';
 import { UserContext } from '../../context/UserProvider';
 import useBookshelf from '../../hooks/useBookshelf';
+import { mapGoogleBooksToBook } from '../../utils/books';
 import Button from '../Button';
 import './Dialog.css';
 
 interface Props {
-  book: Book;
+  book: GoogleBook;
   isOpen: boolean;
   handleDismiss: () => void;
 }
-const BookDialog: React.FC<Props> = (props: Props) => {
+const GoogleBookDialog: React.FC<Props> = (props: Props) => {
   const { user } = useContext(UserContext);
   const { books, addBook, removeBook } = useContext(BookshelfContext);
   const { saveToBookshelf } = useBookshelf({ userId: '' });
+  // const isOnBookshelf = Boolean(
+  //   books.find((book) => book.id === props.book.id)
+  // );
+
+  const handleAddToBookshelf = () => {
+    if (!user) {
+      console.log('There is no user logged in.');
+      return;
+    }
+    const bookToPersist = mapGoogleBooksToBook(props.book);
+    saveToBookshelf({
+      userId: user.id,
+      book: bookToPersist,
+    });
+
+    addBook(bookToPersist);
+  };
 
   const handleRemoveFromBookshelf = () => {
     removeBook(props.book.id);
@@ -33,13 +51,17 @@ const BookDialog: React.FC<Props> = (props: Props) => {
         <button className='closeBtn' onClick={props.handleDismiss}>
           <Close />
         </button>
-        <Dialog.Title>{props.book.title}</Dialog.Title>
+        <Dialog.Title>{props.book.volumeInfo.title}</Dialog.Title>
         <Button
-          label={'Remove from my bokshelf'}
-          onClick={handleRemoveFromBookshelf}
+          label={
+            /*isOnBookshelf ? 'Remove from my bokshelf' :*/ 'Add to my bookshelf'
+          }
+          onClick={
+            /*isOnBookshelf ? handleRemoveFromBookshelf :*/ handleAddToBookshelf
+          }
         />
         <Dialog.Description className='description'>
-          {props.book.description}
+          {props.book.volumeInfo.description}
         </Dialog.Description>
         <button onClick={props.handleDismiss}>Deactivate</button>
         <button onClick={props.handleDismiss}>Cancel</button>
@@ -48,4 +70,4 @@ const BookDialog: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default BookDialog;
+export default GoogleBookDialog;

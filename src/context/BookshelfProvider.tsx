@@ -8,8 +8,8 @@ import useBookshelf from '../hooks/useBookshelf';
 import { UserContext } from './UserProvider';
 
 interface BookshelfContextProps {
-  books: GoogleBook[];
-  addBook: (book: GoogleBook) => void;
+  books: Book[];
+  addBook: (book: Book) => void;
   removeBook: (id: string) => void;
 }
 
@@ -22,7 +22,7 @@ export const BookshelfContext = React.createContext<BookshelfContextProps>({
 const BookshelfProvider = ({ children }: PropsWithChildren) => {
   const { user } = useContext(UserContext);
   const { userBookshelf } = useBookshelf({ userId: user?.id ?? '' });
-  const [books, setBooks] = useState<GoogleBook[]>(userBookshelf.data ?? []);
+  const [books, setBooks] = useState<Book[]>(userBookshelf.data ?? []);
 
   useEffect(() => {
     if (userBookshelf.data) {
@@ -30,7 +30,7 @@ const BookshelfProvider = ({ children }: PropsWithChildren) => {
     }
   }, [userBookshelf.data]);
 
-  const addBook = (book: GoogleBook) => {
+  const addBook = (book: Book) => {
     setBooks([...books, book]);
   };
 

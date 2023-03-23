@@ -63,7 +63,10 @@ const Home = () => {
       </div> */}
       <BooksWrapper>
         {mutation.data && (
-          <BookList books={mutation.data.items as GoogleBook[]} />
+          <BookList
+            books={mutation.data.items as GoogleBook[]}
+            fromGoogle={true}
+          />
         )}
       </BooksWrapper>
     </main>

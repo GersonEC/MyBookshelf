@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import BookDialog from '../Dialog';
+import BookDialog from '../Dialog/BookDialog';
 import Card from './Card';
 
 interface Props {
-  book: GoogleBook;
+  book: Book;
 }
 
 export const BookCard: React.FC<Props> = ({ book }) => {
-  const defaultCover = book.volumeInfo.imageLinks
-    ? book.volumeInfo.imageLinks.thumbnail
-    : '';
+  const defaultCover = book.thumbnail;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDismiss = () => setIsOpen(false);
