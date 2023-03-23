@@ -3,11 +3,11 @@ import { QUERY_KEY } from '../utils/constants';
 
 interface Payload {
   userId: string;
-  book: GoogleBook;
+  book: Book;
 }
 
 const persistInBookshelf = async ({ userId, book }: Payload) => {
-  const res = await fetch(`http://localhost:8080/saveToBookshelf`, {
+  const res = await fetch(`http://localhost:8080/bookshelf`, {
     method: 'POST',
     body: JSON.stringify({
       userId,
@@ -17,7 +17,6 @@ const persistInBookshelf = async ({ userId, book }: Payload) => {
   const json = await res.json();
   return json;
 };
-
 
 const fetchUserBookshelf = async (userId: string) => {
   const res = await fetch(`http://localhost:8080/bookshelf/${userId}`);

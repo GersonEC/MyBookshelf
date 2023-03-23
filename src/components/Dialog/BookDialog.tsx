@@ -27,9 +27,10 @@ const BookDialog: React.FC<Props> = (props: Props) => {
       console.log('There is no user logged in.');
       return;
     }
+    const bookToSend = mapGoogleBooksToBook(props.book);
     saveToBookshelf({
       userId: user.id,
-      book: props.book,
+      book: bookToSend,
     });
     addBook(props.book);
   };
