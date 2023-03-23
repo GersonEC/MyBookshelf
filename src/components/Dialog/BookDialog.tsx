@@ -2,7 +2,6 @@ import { Dialog } from '@headlessui/react';
 import { X as Close } from 'react-feather';
 
 import { useContext } from 'react';
-import { BookshelfContext } from '../../context/BookshelfProvider';
 import { UserContext } from '../../context/UserProvider';
 import useBookshelf from '../../hooks/useBookshelf';
 import Button from '../Button';
@@ -15,11 +14,17 @@ interface Props {
 }
 const BookDialog: React.FC<Props> = (props: Props) => {
   const { user } = useContext(UserContext);
-  const { books, addBook, removeBook } = useContext(BookshelfContext);
-  const { saveToBookshelf } = useBookshelf({ userId: '' });
+  const { removeFromBookshelf } = useBookshelf({ userId: '' });
 
   const handleRemoveFromBookshelf = () => {
-    removeBook(props.book.id);
+    if (!user) {
+      console.log('There is no user logged in.');
+      return;
+    }
+    removeFromBookshelf({
+      userId: user?.id,
+      bookId: props.book.id,
+    });
   };
 
   return (

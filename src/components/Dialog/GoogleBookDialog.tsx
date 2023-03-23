@@ -2,7 +2,6 @@ import { Dialog } from '@headlessui/react';
 import { X as Close } from 'react-feather';
 
 import { useContext } from 'react';
-import { BookshelfContext } from '../../context/BookshelfProvider';
 import { UserContext } from '../../context/UserProvider';
 import useBookshelf from '../../hooks/useBookshelf';
 import { mapGoogleBooksToBook } from '../../utils/books';
@@ -16,11 +15,7 @@ interface Props {
 }
 const GoogleBookDialog: React.FC<Props> = (props: Props) => {
   const { user } = useContext(UserContext);
-  const { books, addBook, removeBook } = useContext(BookshelfContext);
   const { saveToBookshelf } = useBookshelf({ userId: '' });
-  // const isOnBookshelf = Boolean(
-  //   books.find((book) => book.id === props.book.id)
-  // );
 
   const handleAddToBookshelf = () => {
     if (!user) {
@@ -32,12 +27,6 @@ const GoogleBookDialog: React.FC<Props> = (props: Props) => {
       userId: user.id,
       book: bookToPersist,
     });
-
-    addBook(bookToPersist);
-  };
-
-  const handleRemoveFromBookshelf = () => {
-    removeBook(props.book.id);
   };
 
   return (
